@@ -1,0 +1,32 @@
+{
+  "name": "agile-cli",
+  "version": "0.1.0",
+  "description": "agile系列框架整合使用脚手架(agile-ui、agile-vm等)",
+  "main": "index.js",
+  "bin": {
+    "agile-cli": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nandy007/agile-cli.git"
+  },
+  "keywords": [
+    "agile",
+    "agile-ui",
+    "agile-vm",
+    "脚手架"
+  ],
+  "author": "nandy007",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nandy007/agile-cli/issues"
+  },
+  "homepage": "https://github.com/nandy007/agile-cli#readme",
+  "dependencies": {
+    "commander": "^2.11.0",
+    "glob": "^7.1.2"
+  }
+}
