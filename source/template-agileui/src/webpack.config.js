@@ -18,19 +18,23 @@ module.exports = {
         port: 3000
     },
     module: {
-        rules: [
+        rules:  [
             {
                 test: /\.aui$/,
-                use: {
-                    loader: "aui-loader"
-                }
+                loader: "aui-loader"
             },
             {
                 test: /(\.jsx|\.js)$/,
-                use: {
-                    loader: "babel-loader"
-                },
+                loader: "babel-loader",
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader'
+            },
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader?limit=8192'
             }
         ]
     },
