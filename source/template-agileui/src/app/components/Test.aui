@@ -1,0 +1,27 @@
+<ui>
+    <div>测试组件</div>
+</ui>
+
+<script>
+
+function Test(){
+
+}
+
+Test.prototype = {
+    created: function(){
+        console.log('测试组件已创建');
+    }
+}
+
+module.exoprts = Test;
+
+</script>
+
+<style>
+aui-test{
+    display: block;
+    background: #ff0000;
+    color: #fff;
+}
+</style>
