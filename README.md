@@ -19,9 +19,13 @@ aui-component框架：https://github.com/nandy007/aui-component
 
 ls指令用于列出目前可用于创建项目工程的模板，如下：
 
+```bash
+
     agile-cli ls
 
-显示结果以 name:description 形式展现，每个模板信息占一行
+```
+
+显示结果以 **name:description** 形式展现，每个模板信息占一行
 
 
 ## use [options] <name>指令
@@ -33,6 +37,14 @@ use指令用于通过模板名称来创建项目
 options仅有一项，即-f|--force，不存在时会检测项目目录是否为空，空则拒绝；当存在时忽略项目目录内容强制覆盖生成项目
 
 name为项目名称，即ls指令显示的内容中冒号之前的部分
+
+比如：
+
+```javascript
+
+	agile-cli use agileui
+
+```
 
 
 # 用法
