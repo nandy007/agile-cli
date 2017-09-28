@@ -1,6 +1,12 @@
 const webpack = require('webpack'),
     path = require('path');
 
+const plugins = [];
+
+if (process.argv[1].indexOf('webpack-dev-server')) {
+    plugins.push(new webpack.HotModuleReplacementPlugin());
+}
+
 module.exports = {
     entry: __dirname + "/app/main.js", //入口文件
     output: {
@@ -35,6 +41,11 @@ module.exports = {
             {
                 test: /\.(png|jpg)$/,
                 loader: 'url-loader?limit=8192'
+            },
+            {
+                // 专供iconfont方案使用的，后面会带一串时间戳，需要特别匹配到
+                test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
+                loader: 'url-loader?name=fonts/[name][md5:hash:hex:7].[ext]',
             }
         ]
     },
@@ -43,7 +54,5 @@ module.exports = {
             
         }
     },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ]
+    plugins: plugins
 };
