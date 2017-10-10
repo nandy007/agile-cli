@@ -1,6 +1,6 @@
 {
   "name": "agile-cli",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "agile系列框架整合使用脚手架(agile-ui、agile-vm、agile-component等)",
   "main": "index.js",
   "bin": {

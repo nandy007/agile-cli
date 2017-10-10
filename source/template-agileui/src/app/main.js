@@ -7,4 +7,4 @@ require('agile-vm');
 
 
 // 引入组件，一般是在具体逻辑的地方写，只要在组件使用前引入即可
-require('./components/Hello.aui');
+require('./components/Main.aui');

@@ -1,0 +1,40 @@
+<ui>
+    <div>使用<a href="https://github.com/nandy007/agile-ui" target="_blank">agile ui</a>和<a href="https://github.com/nandy007/agile-vm" target="_blank">agile vm</a>框架可以快速搭建组件化前端框架</div>
+    <aui-hello></aui-hello>
+</ui>
+
+<script>
+    require('./Hello.aui');
+
+    function Main() {
+
+    }
+
+    Main.prototype = {
+        created: function () {
+            console.log('Main组件已创建');
+        }
+    }
+
+    Main.tag = 'main';
+
+    module.exports = Main;
+
+</script>
+
+<style>
+    aui-main {
+        display: block;
+        margin: 20px;
+        padding:10px;
+        border: 1px solid #ff0000;
+        line-height: 32px;
+        text-align: center;
+        color: #333;
+    }
+
+    aui-main a{
+        text-decoration: none;
+        color: #999;
+    }
+</style>
