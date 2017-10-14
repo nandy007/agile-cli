@@ -3,7 +3,7 @@ const webpack = require('webpack'),
 
 const plugins = [];
 
-if (process.argv[1].indexOf('webpack-dev-server')) {
+if (process.argv[1].indexOf('webpack-dev-server') > -1) {
 
     plugins.push(new webpack.HotModuleReplacementPlugin());
 
@@ -44,6 +44,12 @@ if (process.argv[1].indexOf('webpack-dev-server')) {
         return new HotModuleReplacementPartnerPlugin({ options: true });
 
     })());
+}else{
+    plugins.push(new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }));
 }
 
 module.exports = {
