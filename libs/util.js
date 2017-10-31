@@ -46,5 +46,6 @@ var exists = function (src, dst, callback) {
 module.exports = {
     exists: function(from, to){
         exists(from, to, copy)
-    }
+    },
+    copy: copy
 };

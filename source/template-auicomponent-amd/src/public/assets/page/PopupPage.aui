@@ -1,0 +1,134 @@
+<ui>
+    <aui-titlebar>
+        <aui-action page="{action:'back'}">
+            <i class="icon iconfont icon-fanhui1"></i>
+        </aui-action>
+
+        <span class="title">Popup</span>
+    </aui-titlebar>
+    <br/>
+    <ul class="popup-item">
+        <li v-for="item in list" v-text="item.title" v-on:click="item.doClick"></li>
+    </ul>
+</ui>
+
+<script>
+
+(function (component) {
+
+    if (window.define && window.define.amd) {
+        window.require([
+                        'agile-vm',
+                        'aui!./@auicomponents/popup/index',
+                        'aui!./@auicomponents/action/index',
+                        'aui!./@auicomponents/button/index'
+                    ], function ($, Popup) {
+            define([], function () {
+                return component($, Popup);
+            });
+        });
+    } else {
+        require('../../@auicomponents/action');
+
+        require('../../@auicomponents/button')
+
+        var Popup = require('../../@auicomponents/popup');
+
+        var $ = require('agile-vm');
+
+        module.exports = component($, Popup);
+    }
+
+})(function ($, Popup) {
+
+    function PopupPage() {
+
+    }
+
+    PopupPage.prototype = {
+        created: function(){
+            $(this.$el).on('enter', function(){
+                console.log('已进入');
+            }).on('leave', function(){
+                console.log('已离开');
+            }).render({
+                list: [
+                    {
+                        title: 'top',
+                        doClick: function(){
+                            Popup.show({
+                                html: '<aui-button popup-handler="close">关闭</aui-button>',
+                                pos: 'top'
+                            });
+                        }
+                    },
+                    {
+                        title: 'right',
+                        doClick: function(){
+                            Popup.show({
+                                html: '<aui-button popup-handler="close">关闭</aui-button>',
+                                pos: 'right'
+                            });
+                        }
+                    },
+                    {
+                        title: 'bottom',
+                        doClick: function(){
+                            Popup.show({
+                                html: '<aui-button popup-handler="close">关闭</aui-button>',
+                                pos: 'bottom'
+                            });
+                        }
+                    },
+                    {
+                        title: 'left',
+                        doClick: function(){
+                            Popup.show({
+                                html: '<aui-button popup-handler="close">关闭</aui-button>',
+                                pos: 'left'
+                            });
+                        }
+                    },
+                    {
+                        title: 'center',
+                        doClick: function(){
+                            Popup.show({
+                                html: '<aui-button popup-handler="close">关闭</aui-button>',
+                                pos: 'center',
+                                isBlock: true
+                            });
+                        }
+                    }
+                ]
+            });
+        }
+    };
+
+    PopupPage.tag = 'popuppage';
+
+    return PopupPage;
+});
+
+
+</script>
+
+<style>
+    .popup-item {
+        display: block;
+    }
+
+    .popup-item li:first-child{
+        border-top: 1px solid #ececec;
+    }
+    .popup-item li{
+        height: 48px;
+        line-height: 48px;
+        padding: 0px 8px;
+        background: transparent;
+        border-bottom: 1px solid #ececec;
+    }
+
+    .popup-item li:hover {
+        background: #efefef;
+    }
+</style>

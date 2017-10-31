@@ -1,0 +1,103 @@
+<ui>
+    <aui-page transition="slide"></aui-page>
+</ui>
+
+<script>
+
+(function (component) {
+
+    if (window.define && window.define.amd) {
+        window.require([
+                        'aui!./@auicomponents/action/index',              
+                        'aui!./page/IndexPage', 
+                        'aui!./page/PopupPage', 
+                        'aui!./page/RefreshPage', 
+                        'aui!./page/FormPage',
+                        'aui!./@auicomponents/page/index',
+                    ], function(Action, IndexPage, PopupPage, RefreshPage, FormPage, page) {
+            define([], function () {
+                return component(Action, IndexPage, PopupPage, RefreshPage, FormPage, page);
+            });
+        });
+    } else {
+       
+
+        var Action = require('../../@auicomponents/action');
+        var IndexPage = require('./IndexPage.aui');
+        var PopupPage = require('./PopupPage.aui');
+        var RefreshPage = require('./RefreshPage.aui');
+        var FormPage = require('./FormPage.aui');
+        var page = require('../../@auicomponents/page');
+
+        module.exports = component(Action, IndexPage, PopupPage, RefreshPage, FormPage, page);
+    }
+
+})(function (Action, IndexPage, PopupPage, RefreshPage, FormPage, page) {
+    var router = Action.router;
+    router.add([
+        {
+            path: '/',
+            redirect: '/index'
+        },
+        {
+            path: /\/index.*/,
+            component: IndexPage,
+            cache: true
+        },
+        {
+            path: /\/popup.*/,
+            component: PopupPage
+        },
+        {
+            path: /\/refresh.*/,
+            component: RefreshPage,
+            cache: true
+        },
+        {
+            path: /\/form.*/,
+            component: FormPage
+        }
+    ]);
+    function Main() {
+
+    }
+    Main.prototype = {
+        created: function () {
+            var page = location.hash.replace('#', '');
+            router.go(page);
+        }
+    };
+    Main.tag = 'main';
+    return Main;
+});
+
+
+    
+
+</script>
+
+<style>
+html, body {
+    height: 100%;
+}
+body {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -o-text-size-adjust: none;
+    font-size: 15px;
+    font-family: Arial, "Microsoft Yahei";
+}
+aui-main{
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+}
+</style>

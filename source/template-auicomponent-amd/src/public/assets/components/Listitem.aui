@@ -1,0 +1,29 @@
+<script>
+    function Listitem() {
+
+    }
+
+    Listitem.prototype = {};
+    Listitem.tag = 'listitem';
+
+    module.exports = Listitem;
+
+</script>
+
+<style>
+aui-listitem{
+    display: block;
+    border-bottom: 1px solid #cecece;
+    padding: 10px 6px;
+}
+
+aui-listitem > .title{
+    font-size: 20px;
+    color: #333;
+    line-height: 30px;
+}
+aui-listitem > .desc{
+    font-size: 12px;
+    color: #acacac;
+}
+</style>

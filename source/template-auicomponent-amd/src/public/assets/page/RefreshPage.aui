@@ -1,0 +1,114 @@
+<ui>
+    <aui-titlebar>
+        <aui-action page="{action:'back'}">
+            <i class="icon iconfont icon-fanhui1"></i>
+        </aui-action>
+
+        <span class="title">Refresh</span>
+    </aui-titlebar>
+    <aui-refresh role="pull" style="top:41px;">
+        <div>
+            <aui-listitem v-for="item in list">
+                <span class="title" v-text="item.title"></span>
+                <p class="desc" v-text="item.desc"></p>
+            </aui-listitem>
+        </div>
+    </aui-refresh>
+</ui>
+
+<script>
+
+(function (component) {
+
+    if (window.define && window.define.amd) {
+        window.require([
+                        'agile-vm',
+                        'aui!./@auicomponents/action/index',
+                        'aui!./@auicomponents/refresh/index',
+                        'aui!./components/Listitem'
+                    ], function ($) {
+            define([], function () {
+                return component($);
+            });
+        });
+    } else {
+        require('../../@auicomponents/action');
+        require('../../@auicomponents/refresh');
+        require('../components/Listitem.aui');
+
+        var $ = require('agile-vm');
+
+        module.exports = component($);
+    }
+
+})(function ($) {
+
+    function RefreshPage() {
+
+    }
+
+    RefreshPage.prototype = {
+        created: function () {
+            $('aui-refresh')
+                .on('pulldown', function () {
+                    console.log('下拉刷新触发');
+                    var _this = this;
+                    obj.list.unshift({
+                        title: '标题' + (obj.list.length + 1),
+                        desc: '这是新加的数据哦'
+                    });
+                    setTimeout(function () {
+                        _this.refresh();
+                    }, 2000);
+                })
+                .on('pullup', function () {
+                    console.log('上拉刷新触发');
+                    var _this = this;
+                    obj.list.push({
+                        title: '标题' + (obj.list.length + 1),
+                        desc: '这是新加的数据哦'
+                    });
+                    setTimeout(function () {
+                        _this.refresh();
+                    }, 2000);
+                })
+                .on('scrolltop', function () {
+                    console.log('滑到顶部');
+                })
+                .on('scrollbottom', function () {
+                    console.log('滑到底部');
+                });
+            var obj = {
+                list: [
+                    {
+                        title: '标题1',
+                        desc: '这是一个标题描述哦'
+                    },
+                    {
+                        title: '标题2',
+                        desc: '这是一个标题描述哦'
+                    },
+                    {
+                        title: '标题3',
+                        desc: '这是一个标题描述哦'
+                    },
+                    {
+                        title: '标题4',
+                        desc: '这是一个标题描述哦'
+                    },
+                    {
+                        title: '标题5',
+                        desc: '这是一个标题描述哦'
+                    }
+                ]
+            };
+            $(this.$el).render(obj);
+        }
+    };
+
+    RefreshPage.tag = 'refreshpage';
+
+    return RefreshPage;
+});
+
+</script>

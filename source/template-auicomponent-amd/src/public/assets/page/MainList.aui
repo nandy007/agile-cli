@@ -1,0 +1,212 @@
+<ui>
+    <br/>
+
+    <aui-slider class="slider-container" style="height:230px;">
+        <div class="slider-wrapper">
+            <div class="slider-slide">
+                <img src="./assets/images/slide1.jpg" />
+                <div class="slide-title">新闻标题1</div>
+            </div>
+            <div class="slider-slide">
+                <img src="./assets/images/slide2.jpg" />
+                <div class="slide-title">新闻标题2</div>
+            </div>
+            <div class="slider-slide" style="background-color: yellow;">
+                <img src="./assets/images/slide3.jpg" />
+                <div class="slide-title">新闻标题3</div>
+            </div>
+        </div>
+        <div class="slider-pagination"></div>
+    </aui-slider>
+
+    <br/>
+
+    <ul>
+        <li v-for="item in list" v-on:click="item.doClick" v-html="item.title">
+
+        </li>
+    </ul>
+
+    <br/>
+
+</ui>
+
+<script>
+
+(function (component) {
+
+    if (window.define && window.define.amd) {
+        window.require([
+                        'aui!./@auicomponents/action/index',              
+                        'aui!./@auicomponents/alert/index',   
+                        'aui!./@auicomponents/confirm/index',   
+                        'aui!./@auicomponents/toast/index',   
+                        'aui!./@auicomponents/loading/index',   
+                        'aui!./@auicomponents/actionsheet/index',
+                        'aui!./@auicomponents/button/index',
+                        'aui!./@auicomponents/slider/index',
+                        'aui!./@auicomponents/datetime/index',
+                        'css!/assets/css/app',
+                        'css!./@auicomponents/css/color',
+                        'css!/assets/css/font-aui/iconfont',
+                    ], function(Action, Alert, Confirm, Toast, Loading, Actionsheet) {
+            define([], function () {
+                return component(Action, Alert, Confirm, Toast, Loading, Actionsheet);
+            });
+        });
+    } else {
+       
+        var Action = require('../../@auicomponents/action');
+        var Alert = require('../../@auicomponents/alert');
+        var Confirm = require('../../@auicomponents/confirm');
+        var Toast = require('../../@auicomponents/toast');
+        var Loading = require('../../@auicomponents/loading');
+        var Actionsheet = require('../../@auicomponents/actionsheet');
+
+        require('../../@auicomponents/button');// 引入button组件
+        require('../../@auicomponents/slider');// 引入slider组件
+        require('../../@auicomponents/datetime');// 引入datetime组件
+
+        require('../assets/css/app.css');
+        require('../../@auicomponents/css/color.css');
+        require('../assets/css/font-aui/iconfont.css');
+
+        module.exports = component(Action, Alert, Confirm, Toast, Loading, Actionsheet);
+    }
+
+})(function (Action, Alert, Confirm, Toast, Loading, Actionsheet) {
+    var router = Action.router;
+
+    function MainList() {
+
+    }
+
+    MainList.prototype = {
+        created: function () {
+            $(this.$el).render({
+                list: [
+                    {
+                        title: 'Alert组件',
+                        doClick: function () {
+                            // 引入alert组件并显示
+                            Alert.show({
+                                title: '警示',
+                                content: '前方有熊出没',
+                                doOk: function () {
+                                    console.log('终于走了');
+                                }
+                            });
+                        }
+                    },
+                    {
+                        title: 'Confirm组件',
+                        doClick: function () {
+                            // 引入confirm组件并显示
+                            Confirm.show({
+                                content: '你是个熊孩子吗',
+                                doOk: function () {
+                                    console.log('我认怂');
+                                },
+                                doCancel: function () {
+                                    console.log('滚犊子');
+                                }
+                            });
+                        }
+                    },
+                    {
+                        title: 'Toast组件',
+                        doClick: function () {
+                            // 引入toast组件并显示
+                            Toast.show('是你变了吗', function () {
+                                console.log('没变');
+                            });
+                        }
+                    },
+                    {
+                        title: 'Loading组件',
+                        doClick: function () {
+                            // 引入toast组件并显示
+                            Loading.show();
+                            setTimeout(function(){
+                                Loading.hide();
+                            }, 3000);
+                        }
+                    },
+                    {
+                        title: 'Popup组件',
+                        doClick: function (e) {
+                            router.go('/popup');
+                        }
+                    },
+                    {
+                        title: 'Actionsheet组件',
+                        doClick: function (e) {
+                            // 引入Actionsheet组件并显示
+                            Actionsheet.show({
+                                list: [
+                                    {
+                                        text: '菜单一',
+                                        handler: function () {
+                                            console.log('点了菜单一');
+                                        }
+                                    },
+                                    {
+                                        text: '菜单二',
+                                        handler: function () {
+                                            console.log('点了菜单二');
+                                        }
+                                    }
+                                ],
+                                doCancel: function () {
+                                    console.log('点了取消');
+                                }
+                            });
+
+                        }
+                    },
+                    {
+                        title: 'Refresh组件',
+                        doClick: function (e) {
+                            router.go('/refresh');
+                        }
+                    },
+                    {
+                        title: 'Form组件',
+                        doClick: function (e) {
+                            router.go('/form');
+                        }
+                    }
+                ]
+            });
+        }
+    }
+
+    MainList.tag = 'mainlist';
+
+    return MainList;
+
+});
+
+
+</script>
+
+<style>
+    
+    aui-mainlist{
+        display: block;
+        width:100%;
+        height: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    aui-mainlist li {
+        padding: 16px 10px;
+        background: #ececec;
+        border-bottom: 1px solid #dedede;
+        cursor: pointer;
+    }
+
+    aui-mainlist li:hover {
+        background: #cecece;
+    }
+</style>
