@@ -1,5 +1,6 @@
 {
     "id": "aui-amd",
     "name": "aui组件amd版",
-    "path": "source/template-auicomponent-amd"
+    "path": "source/template-auicomponent-amd",
+    "firstQuestion": "package"
 }

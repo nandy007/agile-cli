@@ -1,5 +1,6 @@
 {
     "id": "agileui",
     "name": "agile ui模板",
-    "path": "source/template-agileui"
+    "path": "source/template-agileui",
+    "firstQuestion": "package"
 }

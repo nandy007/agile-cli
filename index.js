@@ -7,7 +7,7 @@ var program = require('commander'),
 
 var packageJSON = require('./package.json');
 
-function showConsole(){
+function showConsole() {
     var arr = Array.prototype.slice.call(arguments, 0);
     arr.unshift('');
     arr.push('');
@@ -33,19 +33,19 @@ program
         var ls = require('./libs/ls');
         var template = ls.getTemplate(name);
 
-        if(!template){
-            showConsole('名称为 [ '+ name + ' ] 的模板不存在！');
+        if (!template) {
+            showConsole('名称为 [ ' + name + ' ] 的模板不存在！');
             return;
         }
 
-        var result = ls.createByTemplate(template, options.force);
+        ls.createByTemplate(template, options.force, function (result) {
+            if (result) {
+                showConsole(result.msg);
+            } else {
+                showConsole('根据模板 [ ' + name + ' ] 创建项目完毕', '请执行npm install指令初始化项目', '项目根目录包含readme文件，请认真阅读');
+            }
+        });
 
-        if(result){
-             showConsole(result.msg);
-        }else{
-            showConsole('根据模板 [ '+name+' ] 创建项目完毕', '请执行npm install指令初始化项目', '项目根目录包含readme文件，请认真阅读');
-        }
-        
     });
 
 program.parse(process.argv);//开始解析用户输入的命令
