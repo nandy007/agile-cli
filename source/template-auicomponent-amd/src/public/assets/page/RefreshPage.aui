@@ -22,7 +22,7 @@
 
     if (window.define && window.define.amd) {
         window.require([
-                        'agile-vm',
+                        'agile-ce',
                         'aui!./@auicomponents/action/index',
                         'aui!./@auicomponents/refresh/index',
                         'aui!./components/Listitem'
@@ -36,7 +36,7 @@
         require('../../@auicomponents/refresh');
         require('../components/Listitem.aui');
 
-        var $ = require('agile-vm');
+        var $ = require('agile-ce');
 
         module.exports = component($);
     }

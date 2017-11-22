@@ -18,7 +18,7 @@
 
     if (window.define && window.define.amd) {
         window.require([
-                        'agile-vm',
+                        'agile-ce',
                         'aui!./@auicomponents/popup/index',
                         'aui!./@auicomponents/action/index',
                         'aui!./@auicomponents/button/index'
@@ -34,7 +34,7 @@
 
         var Popup = require('../../@auicomponents/popup');
 
-        var $ = require('agile-vm');
+        var $ = require('agile-ce');
 
         module.exports = component($, Popup);
     }

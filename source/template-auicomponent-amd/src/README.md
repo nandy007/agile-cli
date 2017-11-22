@@ -1,6 +1,6 @@
 # aui-amd模板说明
 
-此模板默认包含：chestnut-app、agile-ui、agile-vm和aui-component框架用于组件化的mvvm模式开发。
+此模板默认包含：chestnut-app、agile-ui、agile-ce和aui-component框架用于组件化的mvvm模式开发。
 
 其中chestnut-app为koa2框架封装，其他为html前端框架
 
@@ -12,7 +12,7 @@ app.js :chestnut-app启动文件
 
 config.js : 配置文件，其中port为启动端口，如有冲突请自行修改
 
-postinstall.js : install命令后的处理，此操作会把agile-vm、agile-ui、agile-component等模块的浏览器依赖资源拷贝到指定目录
+postinstall.js : install命令后的处理，此操作会把agile-ce、agile-ui、agile-component等模块的浏览器依赖资源拷贝到指定目录
 
 public/index.html : 首页地址，引入了require.js和main.js入口文件
 

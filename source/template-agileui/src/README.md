@@ -1,6 +1,6 @@
 # agileui模板说明
 
-此模板默认包含：agile-ui、agile-vm和aui-component框架用于组件化的mvvm模式开发。
+此模板默认包含：agile-ui、agile-ce和aui-component框架用于组件化的mvvm模式开发。
 
 项目以webpack开发和打包。
 

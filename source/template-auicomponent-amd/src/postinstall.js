@@ -3,8 +3,8 @@ var path = require('path'), fs = require('fs');
 
 var files = [
     {
-        src: path.join(__dirname, './node_modules/agile-vm/dist/agile.vm.browser.js'),
-        target: path.join(__dirname, './public/assets/frameworks/agile/agile.vm.browser.js')
+        src: path.join(__dirname, './node_modules/agile-ce/dist/agile.ce.browser.js'),
+        target: path.join(__dirname, './public/assets/frameworks/agile/agile.ce.browser.js')
     },
     {
         src: path.join(__dirname, './node_modules/agile-ui/dist/agile.ui.js'),

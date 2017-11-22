@@ -1,7 +1,7 @@
 {
   "name": "agile-cli",
-  "version": "0.3.9",
-  "description": "agile系列框架整合使用脚手架(agile-ui、agile-vm、agile-component等)",
+  "version": "0.4.1",
+  "description": "agile系列框架整合使用脚手架(agile-ui、agile-ce、agile-component等)",
   "main": "index.js",
   "bin": {
     "agile-cli": "./index.js"
@@ -16,7 +16,7 @@
   "keywords": [
     "agile",
     "agile-ui",
-    "agile-vm",
+    "agile-ce",
     "脚手架"
   ],
   "author": "nandy007",

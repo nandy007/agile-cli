@@ -14,9 +14,9 @@
 
 此框架用于加载符合aui规范的*.aui文件，可以用于webpack（集成和同步加载）和requirejs（异步加载）环境
 
-## agile-vm
+## agile-ce
 
-地址：[https://github.com/nandy007/agile-vm](https://github.com/nandy007/agile-vm "https://github.com/nandy007/agile-vm")
+地址：[https://github.com/nandy007/agile-ce](https://github.com/nandy007/agile-ce "https://github.com/nandy007/agile-ce")
 
 此框架提供jquery规范的mvvm使用。大部分情况对dom的操作应该基于json数据的操作，而不应该使用jquery的$操作，即应该尽量避免直接使用jquery操作dom。
 
@@ -101,7 +101,7 @@ name为项目名称，即ls指令显示的内容中冒号之前的部分
 
 ## agileui模板
 
-此模板使用agile-ui、agile-vm、aui-component、aui-loader框架
+此模板使用agile-ui、agile-ce、aui-component、aui-loader框架
 
 按照上面的《用法》创建项目后，执行 npm run start 即可启动。
 
@@ -114,7 +114,7 @@ name为项目名称，即ls指令显示的内容中冒号之前的部分
 
 ## aui-amd模板
 
-此模板使用agile-ui、agile-vm、aui-component、aui-loader框架
+此模板使用agile-ui、agile-ce、aui-component、aui-loader框架
 
 按照上面《用法》创建项目后，可执行 npm run server 或者 node app.js 即可启动
 

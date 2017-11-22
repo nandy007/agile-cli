@@ -8,7 +8,7 @@ require.config({
 		'lessc': './frameworks/amd/lessc',
 		'normalize': './frameworks/amd/normalize',
 		'aui': './frameworks/agile/aui',
-    	'agile-vm': './frameworks/agile/agile.vm.browser',// 必须
+    	'agile-ce': './frameworks/agile/agile.ce.browser',// 必须
     	'agile-ui': './frameworks/agile/agile.ui'// 必须
     }
 });

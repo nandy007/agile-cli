@@ -1,5 +1,5 @@
 <ui>
-    <div>使用<a href="https://github.com/nandy007/agile-ui" target="_blank">agile ui</a>和<a href="https://github.com/nandy007/agile-vm" target="_blank">agile vm</a>框架可以快速搭建组件化前端框架</div>
+    <div>使用<a href="https://github.com/nandy007/agile-ui" target="_blank">agile ui</a>和<a href="https://github.com/nandy007/agile-ce" target="_blank">agile ce</a>框架可以快速搭建组件化前端框架</div>
     <aui-hello></aui-hello>
 </ui>
 
