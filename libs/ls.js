@@ -8,13 +8,13 @@ var arr = [], templates = {};
 var files = glob.sync('./source/*/template.json', { cwd: path.join(__dirname, '../') });
 files.forEach(function (file) {
     var template = require('.' + file);
-    arr.push(template.id + ':' + template.name);
+    arr.push({id:template.id, name:template.name});
     templates[template.id] = template;
 });
 
 module.exports = {
     getList: function () {
-        return arr.join('\n');
+        return arr;
     },
     getTemplate: function (id) {
         return templates[id];

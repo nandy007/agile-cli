@@ -1,0 +1,31 @@
+<ui>
+    <aui-page></aui-page>
+</ui>
+
+<script>
+    
+    var Frame = function () {
+
+    };
+
+    Frame.prototype = {
+        created: function () {
+            // 组件创建完毕初始化router
+            require('../routers/index');
+        }
+    };
+
+    Frame.tag = 'frame';
+
+    module.exports = Frame;
+
+    // 将主框架主动添加body中
+    $(function(){
+        document.body.innerHTML = '<aui-frame></aui-frame>';
+    });
+
+</script>
+
+<style>
+
+</style>

@@ -1,0 +1,29 @@
+<ui>
+    <div>
+        <h3>main</h3>
+
+        <aui-action page="{action:'back'}">back</aui-action>
+    </div>
+</ui>
+
+<script>
+
+    var Main = function () {
+
+    };
+
+    Main.prototype = {
+        created: function () {
+            
+        }
+    };
+
+    Main.tag = 'main';
+
+    module.exports = Main;
+
+</script>
+
+<style>
+
+</style>

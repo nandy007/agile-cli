@@ -1,0 +1,6 @@
+{
+    "id": "electron-agile",
+    "name": "electron-agile项目模板",
+    "path": "source/template-electron-agile",
+    "firstQuestion": "package"
+}

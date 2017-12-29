@@ -3,47 +3,10 @@ const webpack = require('webpack'),
 
 const plugins = [];
 
-if (process.argv[1].indexOf('webpack-dev-server') > -1) {
+if (process.env.NODE_ENV === 'development') {
 
     plugins.push(new webpack.HotModuleReplacementPlugin());
 
-    plugins.push((function () {
-        // 热更新插件伴侣
-        function HotModuleReplacementPartnerPlugin(options) {
-            // Setup the plugin instance with options...
-        }
-
-        HotModuleReplacementPartnerPlugin.prototype.apply = function (compiler) {
-            
-            compiler.plugin('emit', function (compilation, callback) {
-                var filename = ((compilation.chunks || [] )[0].files || [])[0];
-                if(filename){
-                    var asset = compilation.assets[filename],
-                        source = asset.source();
-                    var funcArr = [
-                        '',
-                        '!(function(){',
-                        '   window.onload = function(){',
-                        '       var head = document.getElementsByTagName("head")[0];',
-                        '       var script = document.createElement("script");',
-                        '       script.type = "text/javascript";',
-                        '       script.src = location.protocol + "//" + location.host + "/webpack-dev-server.js"',
-                        '       head.appendChild(script);',
-                        '   };',
-                        '})();'
-                    ];
-                    asset.source = function(){
-                        return source + funcArr.join('\n');
-                    };
-                }
-                
-                callback();
-            });
-        };
-
-        return new HotModuleReplacementPartnerPlugin({ options: true });
-
-    })());
 }else{
     plugins.push(new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -53,11 +16,12 @@ if (process.argv[1].indexOf('webpack-dev-server') > -1) {
 }
 
 module.exports = {
-    entry: __dirname + "/app/main.js", //入口文件
+    entry: {
+        main: [__dirname + "/app/main.js"]
+    }, //入口文件
     output: {
         path: __dirname + "/public/build",
-        //filename: "bundle-[hash].js"
-        filename: "bundle.js",
+        filename: "[name].bundle.js",
         publicPath: "/build/",
     },
     devtool: 'none',

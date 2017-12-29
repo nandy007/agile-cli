@@ -1,6 +1,6 @@
 {
   "name": "agile-cli",
-  "version": "0.4.3",
+  "version": "0.5.1",
   "description": "agile系列框架整合使用脚手架(agile-ui、agile-ce、agile-component等)",
   "main": "index.js",
   "bin": {
@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/nandy007/agile-cli#readme",
   "dependencies": {
+    "chalk": "^2.3.0",
     "commander": "^2.11.0",
     "glob": "^7.1.2"
   }

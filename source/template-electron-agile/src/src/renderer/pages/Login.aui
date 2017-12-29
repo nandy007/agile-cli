@@ -1,0 +1,31 @@
+<ui>
+    <div>
+        <h3>login</h3>
+
+        <aui-action page="/main">go to main</aui-action>
+    </div>
+</ui>
+
+<script>
+    const { ipcRenderer, remote } = require('electron')
+
+    var Login = function () {
+
+    };
+
+    Login.prototype = {
+        created: function () {
+            var rs = ipcRenderer.sendSync('connect-imserver', 'who are you?');
+            console.log(rs);
+        }
+    };
+
+    Login.tag = 'login';
+
+    module.exports = Login;
+
+</script>
+
+<style>
+
+</style>
