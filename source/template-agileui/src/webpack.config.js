@@ -1,7 +1,11 @@
 const webpack = require('webpack'),
     path = require('path');
 
-const plugins = [];
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const plugins = [
+    new ExtractTextPlugin('css/[name].css')
+];
 
 if (process.env.NODE_ENV === 'development') {
 
@@ -21,7 +25,7 @@ module.exports = {
     }, //入口文件
     output: {
         path: __dirname + "/public/build",
-        filename: "[name].bundle.js",
+        filename: "js/[name].js",
         publicPath: "/build/",
     },
     devtool: 'none',
@@ -45,17 +49,35 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                test: /\.less$/,
+                //loader: 'style-loader!css-loader!less-loader'
+                use: ExtractTextPlugin.extract({ use: ["css-loader", "postcss-loader", "less-loader"], fallback: 'style-loader' }),
+              },
+            {
                 test: /\.css$/,
-                loader: 'style-loader!css-loader!postcss-loader'
+                //loader: 'style-loader!css-loader!postcss-loader'
+                use: ExtractTextPlugin.extract({ use: ["css-loader", "postcss-loader"], fallback: 'style-loader' })
             },
             {
-                test: /\.(png|jpg)$/,
-                loader: 'url-loader?limit=8192'
+                test: /\.(png|jpg|gif)$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8192,
+                        name: 'images/[name].[ext]'
+                    }
+                }]
             },
             {
                 // 专供iconfont方案使用的，后面会带一串时间戳，需要特别匹配到
                 test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
-                loader: 'url-loader?name=fonts/[name][md5:hash:hex:7].[ext]',
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8192,
+                        name: 'fonts/[name].[ext]'
+                    }
+                }]
             }
         ]
     },
