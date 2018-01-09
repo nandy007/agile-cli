@@ -18,6 +18,7 @@ function showConsole() {
 program
     .version(packageJSON.version);
 
+
 program
     .command('ls')//声明命令叫ls
     .description('列出可以使用的模板')//给出这个命令的描述
@@ -67,5 +68,6 @@ program
         });
 
     });
+
 
 program.parse(process.argv);//开始解析用户输入的命令
