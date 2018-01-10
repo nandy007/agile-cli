@@ -4,7 +4,7 @@ var router = require('@auicomponents/action').router;
 router.add([
     {
         path: '/',
-        goto: '/login'
+        redirect: '/login'
     },
     {
         path: /\/login.*/,

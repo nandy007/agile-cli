@@ -1,3 +1,7 @@
+
+
+electron原版包国内比较难下载，建议使用 cnpm install
+
 # 目录说明
 
 

@@ -46,9 +46,11 @@ module.exports = {
                 if (result['package']) {
                     result.projectName = projectPath.split(/[\/\\]/g).pop();
                     var packageContent = fs.readFileSync(path.join(templatePath, 'package.json.tmpl'), 'utf-8');
-                    for(var k in result){
-                        packageContent = packageContent.replace('{{'+k+'}}', result[k]);
-                    }
+                    
+                    packageContent = packageContent.replace(/\{\{([^\}]*)\}\}/g, function(s, s1){
+                        return result[s1] || '';
+                    });
+                    
                     fs.writeFileSync(path.join(projectPath, 'package.json'), packageContent);
                 }
                 cb();
