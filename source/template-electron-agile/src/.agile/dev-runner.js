@@ -9,6 +9,8 @@ const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 
+const kill = require('tree-kill');
+
 const rendererConfig = require('./webpack.renderer.config')
 const mainConfig = require('./webpack.main.config')
 
@@ -68,42 +70,31 @@ class Runner {
         })
     }
 
-    startRenderer(port) {
+    startRenderer() {
         return new Promise((resolve, reject) => {
-            //rendererConfig.entry.renderer.unshift("webpack-dev-server/client?http://localhost:"+port+"/", "webpack/hot/dev-server");
-            rendererConfig.entry.renderer.unshift(path.join(__dirname, 'dev-client'))
+            const rendererProcess = this.rendererProcess = spawn(process.platform === 'win32'?'npm.cmd':'npm', ['run', 'renderer'], {cwd: path.join(__dirname, '../')})
 
-            const compiler = webpack(rendererConfig)
+            let flag = false;
 
-            this.createHotMiddleware(compiler);
-
-            compiler.plugin('compilation', compilation => {
-                compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
-                    this.hotMiddleware.publish({ action: 'reload' })
-                    cb()
-                })
-            })
-
-            compiler.plugin('done', stats => {
-                logStats('Renderer', stats)
-            })
-            //https://webpack.js.org/configuration/dev-server/
-            const server = new WebpackDevServer(
-                compiler,
-                {
-                    contentBase: rendererConfig.devServer.contentBase,
-                    publicPath: rendererConfig.output.publicPath,
-                    quiet: true,
-                    before: (app, ctx) => {
-                        app.use(this.hotMiddleware)
-                        ctx.middleware.waitUntilValid(() => {
-                            resolve()
-                        })
-                    }
+            rendererProcess.stdout.on('data', data => {
+                logStats('Renderer', data.toString().trim())
+                if(!flag && data.toString().indexOf('Compiled successfully')>-1){
+                    flag = true;
+                    resolve();
                 }
-            )
+            })
+            rendererProcess.stderr.on('data', data => {
+                
+                logStats('Renderer', data.toString().trim())
+            })
 
-            server.listen(port)
+            rendererProcess.on('close', () => {
+                if (!this.manualRestart) {
+                    kill(rendererProcess.pid, function(err) {
+                        process.exit('停止服务');
+                    });
+                }
+            })
         })
     }
 
@@ -153,7 +144,7 @@ class Runner {
         })
 
         electronProcess.on('close', () => {
-            if (!this.manualRestart) process.exit()
+            this.rendererProcess.emit('close');
         })
 
     }
@@ -181,8 +172,7 @@ function init() {
     greeting()
 
     const runner = new Runner();
-    const port = rendererConfig.devServer.port; // 从devServer获取启动端口
-    Promise.all([runner.startRenderer(port)/** 载入渲染进程监控 */, runner.startMain()/** 载入主进程监控 */])
+    Promise.all([runner.startRenderer()/** 载入渲染进程监控 */, runner.startMain()/** 载入主进程监控 */])
         .then(() => {
             runner.startElectron()/** 启动electron客户端 */
         })

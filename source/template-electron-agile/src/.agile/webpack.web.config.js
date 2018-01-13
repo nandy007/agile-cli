@@ -5,7 +5,42 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const runTarget = process.env.RUN_TARGET || 'web';
+
+const plugins = [
+  new ExtractTextPlugin('css/[name].css'),
+  new I18nPlugin(languages[language])
+];
+
+const entry = {
+  // 定义renderer渲染进程
+  'theme/default': [path.join(__dirname, '../src/renderer/assets/less/theme/default.less')],
+  'theme/red': [path.join(__dirname, '../src/renderer/assets/less/theme/red.less')],
+  'renderer': [path.join(__dirname, '../src/renderer/renderer.js')]
+};
+
+
+if (process.env.NODE_ENV === 'production') {
+
+  plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+     minimize: true
+    })
+  );
+
+}else{
+
+  plugins.push(new webpack.HotModuleReplacementPlugin());
+
+}
+
 module.exports = {
+  target: runTarget,
   entry: {
     // 定义renderer渲染进程
     renderer: [path.join(__dirname, '../src/renderer/renderer.js')]
@@ -57,7 +92,5 @@ module.exports = {
     __dirname: process.env.NODE_ENV !== 'production',
     __filename: process.env.NODE_ENV !== 'production'
   },
-  plugins: [
-    new ExtractTextPlugin('css/[name].css')
-  ]
+  plugins: plugins
 };
